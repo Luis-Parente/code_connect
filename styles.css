@@ -228,3 +228,7 @@ textarea {
     font-size: 15px;
 }
 
+#upload-btn:hover {
+    cursor: pointer;
+}
+
