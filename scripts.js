@@ -35,3 +35,46 @@ inputUpload.addEventListener("change", async (evento) => {
         }
     }
 })
+
+const inputTags = document.getElementById("categoria");
+const listaTags = document.getElementById("lista-tags");
+
+listaTags.addEventListener("click", (evento) => {
+    if (evento.target.classList.contains("remove-tag")) {
+        const tagQueDeveSerRemovida = evento.target.parentElement;
+        listaTags.removeChild(tagQueDeveSerRemovida);
+    }
+})
+
+const tagsDisponiveis = ["Front-end", "Programação", "Data Science", "Full-stack", "HTML", "CSS", "JavaScript"];
+
+async function verificarTags(tagTexto) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(tagsDisponiveis.includes(tagTexto));
+        }, 1000)
+    })
+}
+
+inputTags.addEventListener("keypress", async (evento) => {
+    if (evento.key === "Enter") {
+        evento.preventDefault();
+        const tagTexto = inputTags.value.trim();
+        if (tagTexto !== "") {
+            try {
+                const tagExiste = await verificarTags(tagTexto);
+                if (tagExiste) {
+                    const novaTag = document.createElement("li");
+                    novaTag.innerHTML = `<p>${tagTexto}</p> <img src="img/close-black.svg" class="remove-tag">`;
+                    listaTags.appendChild(novaTag);
+                    inputTags.value = "";
+                } else {
+                    alert("Tag inválida");
+                }
+            } catch (erro) {
+                console.error("Erro ao inserir tag");
+                alert("Erro ao inserir tag");
+            }
+        }
+    }
+})
