@@ -236,3 +236,11 @@ textarea {
     cursor: pointer;
 }
 
+.botao-publicar:hover {
+    cursor: pointer;
+}
+
+.botao-descartar:hover {
+    cursor: pointer;
+}
+
